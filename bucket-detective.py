@@ -19,9 +19,15 @@ def list_bucket():
         print('Existing buckets:')
         for bucket in response['Buckets']:
             print(f'  {bucket["Name"]}')
+            panda = bucket['Name']
+            
+       
+            print('Current Acl\'s')
+            result = s3.get_bucket_acl(Bucket=f"{panda}")
+            print(result)
             return response
-
-
+            return result
+        
 if __name__ == "__main__":
     list_bucket()
    
