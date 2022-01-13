@@ -1,0 +1,35 @@
+---
+- name: Get AWS asset Information
+  hosts: localhost
+  connection: localhost
+  tasks:
+    - name: get aws s3 bucket info
+      community.aws.aws_s3_bucket_info:
+      register: s3_result
+    - name: save results to a file
+      ansible.builtin.copy:
+        content: "{{ s3_result }}"
+        dest: s3_result.json
+    - name: Print Debug information
+      ansible.builtin.debug:
+        var: s3_result
+    - name: EC2 VPC Acls
+      community.aws.ec2_vpc_nacl_info:
+      register: ec2_result
+    - name: save results to a file
+      ansible.builtin.copy:
+        content: "{{ ec2_result }}"
+        dest: ec2_result.json
+    - name: Print Debug information
+      ansible.builtin.debug:
+        var: ec2_result
+    - name: Ec2 ip results
+      community.aws.ec2_eip_info:
+      register: ec2_ip_results
+    - name: make a new ec2 ip file
+      ansible.builtin.copy:
+        content: "{{ ec2_ip_results }}"
+        dest: ec2_ip_results.json
+    - name: print ec2 ip results
+      ansible.builtin.debug:
+        var: ec2_ip_results
