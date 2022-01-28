@@ -1,5 +1,5 @@
 # bucket-detective
-s3 buceket inspections
+s3 bucket inspections
 
 
 python script - python3 bucket-detective.py 
